@@ -1,0 +1,31 @@
+# Dependencies and build output
+node_modules
+dist
+dist-ssr
+.nitro
+.output
+
+# Git and IDE
+.git
+.gitignore
+.cursor
+.vscode
+.idea
+*.log
+.DS_Store
+
+# Env and secrets (use env_file or build-arg in compose)
+.env
+.env.*
+!.env.example
+
+# Backend runtime data (not needed for frontend image)
+backends/vite/db.json
+backends/vite/auth-db.json
+backends/nitro/auth-db.json
+
+# Docs and misc
+*.md
+old
+my-react-app
+api

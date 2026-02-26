@@ -1,0 +1,7 @@
+/* Стили главной (app layout): подключаются только на этой странице */
+@import url('/musiclab.css');
+
+/* SPA: показывать app layout без табов из musiclab.html */
+.page_app.app-layout {
+  display: flex !important;
+}
