@@ -1,0 +1,17 @@
+{
+  "users": [
+    {
+      "email": "test@example.com",
+      "password": "$2a$10$grscm7iLAV9kpi.jpHSSbuNqc7KUEHoJR1zGQWNCKRI5rl5Xvebs6",
+      "name": "test",
+      "id": 1
+    },
+    {
+      "email": "test2@example.com",
+      "password": "$2a$10$f8OMpHykaKR9dbugRhsaDegnTRT8NL.zf/z7mrPzLSQ1rDuVrS19u",
+      "name": "test2",
+      "id": 2
+    }
+  ],
+  "posts": []
+}

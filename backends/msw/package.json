@@ -1,0 +1,14 @@
+{
+  "name": "musiclab-backend-msw",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "bcryptjs": "^3.0.3",
+    "idb": "^8.0.3",
+    "msw": "^2.12.10"
+  },
+  "msw": {
+    "workerDirectory": ["public"]
+  }
+}
