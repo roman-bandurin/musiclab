@@ -1,0 +1,21 @@
+# Устанавливаем LF для всех текстовых файлов
+* text=auto eol=lf
+
+# Бинарные файлы
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.svg binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.eot binary
+*.pdf binary
+*.zip binary
+*.gz binary
+*.tar binary
+
+# Исключаем node_modules (уже в .gitignore, но на всякий случай)
+node_modules/** -text
