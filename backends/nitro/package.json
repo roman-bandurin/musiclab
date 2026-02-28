@@ -1,0 +1,17 @@
+{
+  "name": "musiclab-backend-nitro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "nitro dev",
+    "build": "nitro build"
+  },
+  "dependencies": {
+    "cors": "^2.8.6"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "nitropack": "^2.13.1"
+  }
+}
