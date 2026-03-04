@@ -55,9 +55,18 @@ function withSetAuthToken (token: string, origin: string | null) {
   }
 }
 
+/** Префикс путей для GitHub Pages (scope /musiclab/); в dev — пусто. */
+const API_BASE = (typeof import.meta !== 'undefined' && import.meta.env?.BASE_URL)
+  ? String(import.meta.env.BASE_URL)
+    .replace(
+      /\/?$/,
+      '',
+    )
+  : ''
+
 export const handlers = [
   http.post(
-    '/api/login',
+    `${API_BASE}/api/login`,
     async ({ request }) => {
       const origin = request.headers.get('Origin')
       const body = (await request.json()) as { email?: string; password?: string }
@@ -130,7 +139,7 @@ export const handlers = [
   ),
 
   http.post(
-    '/api/register',
+    `${API_BASE}/api/register`,
     async ({ request }) => {
       const origin = request.headers.get('Origin')
       const body = (await request.json()) as { name?: string; email?: string; password?: string }
@@ -214,7 +223,7 @@ export const handlers = [
   ),
 
   http.post(
-    '/api/logout',
+    `${API_BASE}/api/logout`,
     async ({ request }) => {
       const origin = request.headers.get('Origin')
       const token = getTokenFromRequest(request)
@@ -235,7 +244,7 @@ export const handlers = [
   ),
 
   http.post(
-    '/api/auth/sign-up/email',
+    `${API_BASE}/api/auth/sign-up/email`,
     async ({ request }) => {
       const origin = request.headers.get('Origin')
       const body = (await request.json()) as { name?: string; email?: string; password?: string }
@@ -318,7 +327,7 @@ export const handlers = [
   ),
 
   http.get(
-    '/api/auth/get-session',
+    `${API_BASE}/api/auth/get-session`,
     async ({ request }) => {
       const origin = request.headers.get('Origin')
       const noStore = { 'Cache-Control': 'no-store' }
@@ -387,7 +396,7 @@ export const handlers = [
   ),
 
   http.post(
-    '/api/auth/sign-out',
+    `${API_BASE}/api/auth/sign-out`,
     async ({ request }) => {
       const origin = request.headers.get('Origin')
       const token = getTokenFromRequest(request)
@@ -408,7 +417,7 @@ export const handlers = [
   ),
 
   http.get(
-    '/api/users',
+    `${API_BASE}/api/users`,
     async ({ request }) => {
       const origin = request.headers.get('Origin')
       const db = await getDb()
@@ -438,7 +447,7 @@ export const handlers = [
   ),
 
   http.delete(
-    '/api/users',
+    `${API_BASE}/api/users`,
     async ({ request }) => {
       const origin = request.headers.get('Origin')
       const db = await getDb()
@@ -455,7 +464,7 @@ export const handlers = [
   ),
 
   http.get(
-    '/api/me',
+    `${API_BASE}/api/me`,
     async ({ request }) => {
       const origin = request.headers.get('Origin')
       let token = getTokenFromRequest(request)

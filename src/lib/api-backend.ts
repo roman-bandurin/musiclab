@@ -5,10 +5,13 @@
 
 const inBrowser = typeof window !== 'undefined'
 
-/** URL API: msw/vite — origin; nitro в dev — '' (proxy); иначе VITE_API_URL. */
+/** URL API: msw/vite — origin + base (для Pages /musiclab/); nitro в dev — '' (proxy); иначе VITE_API_URL. */
 const API_URL: string | undefined = {
   msw: inBrowser
-    ? window.location.origin
+    ? window.location.origin + (import.meta.env.BASE_URL || '/').replace(
+      /\/?$/,
+      '',
+    )
     : undefined,
   vite: inBrowser
     ? window.location.origin

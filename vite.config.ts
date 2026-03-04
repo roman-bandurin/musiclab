@@ -9,6 +9,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   return mergeViteConfig(
     {
+      base: env.VITE_BASE ?? '/',
       plugins: [react(), tailwindcss()],
       resolve: {
         alias: { '@': path.resolve(__dirname, './src') },

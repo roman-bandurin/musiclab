@@ -15,19 +15,35 @@ type AuthAdapter = {
   response: Record<string, (src: unknown) => void>;
 }
 
+const inBrowser = typeof window !== 'undefined'
+
 function ensureContextUrl (ctx: { url: string | URL }): URL {
   const apiUrl = (import.meta.env.VITE_API_URL as string | undefined)?.trim()
-  const base = apiUrl
-    || (typeof window !== 'undefined'
+  const isMsw = import.meta.env.VITE_AUTH_BACKEND === 'msw' && inBrowser
+  const base = isMsw
+    ? window.location.origin + (import.meta.env.BASE_URL || '/')
+    : apiUrl
+    || (inBrowser
       ? window.location.origin
       : 'http://localhost')
+  const basePath = isMsw
+    ? (import.meta.env.BASE_URL || '/').replace(
+      /\/?$/,
+      '',
+    )
+    : ''
   return (ctx.url = z.union([
     z.instanceof(URL),
     z.string()
-      .transform((s) => new URL(
-        s,
-        base,
-      )),
+      .transform((s) => {
+        if (basePath && s.startsWith('/')) {
+          return new URL(window.location.origin + basePath + s)
+        }
+        return new URL(
+          s,
+          base,
+        )
+      }),
   ])
     .parse(ctx.url))
 }
@@ -62,7 +78,9 @@ function createAdapterFetchOptions (adapter: AuthAdapter): ClientFetchOption {
 }
 
 export const authClient = createAuthClient({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_AUTH_BACKEND === 'msw' && inBrowser
+    ? window.location.origin + (import.meta.env.BASE_URL || '/')
+    : import.meta.env.VITE_API_URL,
   fetchOptions: createAdapterFetchOptions((
     {
       nitro: createNitroAuthAdapter(),
