@@ -8,11 +8,18 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+.nitro
+.output
 dist
 dist-ssr
 old
-my-react-app
+api
 *.local
+.env
+public/mockServiceWorker.js
+backends/vite/db.json
+backends/vite/auth-db.json
+backends/nitro/auth-db.json
 
 # Editor directories and files
 .cursor
